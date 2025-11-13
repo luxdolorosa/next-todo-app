@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import connectDB from '@/lib/mongoose'
 import Todo from '@/models/Todo'
+import logger from '@/lib/logger'
 
 // GET: 모든 투두 조회
 export async function GET() {
@@ -8,6 +9,7 @@ export async function GET() {
     await connectDB()
     const todos = await Todo.find({}).sort({ createdAt: -1 }).lean()
     console.log("모든 TODO를 조회했습니다.")
+    logger.info("모든 TODO를 조회했습니다.")
     // _id를 문자열로 변환 (lean() 사용 시 필요)
     const formattedTodos = todos.map(todo => ({
       ...todo,
