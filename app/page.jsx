@@ -95,7 +95,7 @@ export default function Home() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
-            📝 Todo App
+            📝 Todo App 1
           </h1>
 
           {/* 투두 추가 폼 */}
