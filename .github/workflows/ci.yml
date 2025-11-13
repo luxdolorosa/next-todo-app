@@ -30,6 +30,9 @@ jobs:
 
       - name: Build application
         run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI || 'mongodb://localhost:27017/test' }}
+          NODE_ENV: production
 
       - name: Build success
         if: success()
