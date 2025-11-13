@@ -7,7 +7,7 @@ export async function GET() {
   try {
     await connectDB()
     const todos = await Todo.find({}).sort({ createdAt: -1 }).lean()
-    
+    console.log("모든 TODO를 조회했습니다.")
     // _id를 문자열로 변환 (lean() 사용 시 필요)
     const formattedTodos = todos.map(todo => ({
       ...todo,
