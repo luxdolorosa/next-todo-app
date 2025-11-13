@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '21'
           cache: 'npm'
 
       - name: Install dependencies
@@ -37,6 +37,7 @@ jobs:
       - name: Build success
         if: success()
         run: echo "✅ Build completed successfully!"
+
 
       - name: Build failure
         if: failure()
