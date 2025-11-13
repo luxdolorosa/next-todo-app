@@ -94,9 +94,10 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
-            📝 Todo App 1
+          <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center flex items-center justify-center gap-3">
+            <span>Todo App 1</span>
           </h1>
+          
 
           {/* 투두 추가 폼 */}
           <form onSubmit={handleAddTodo} className="mb-8">
