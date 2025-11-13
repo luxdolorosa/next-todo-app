@@ -102,7 +102,21 @@ Render 대시보드에서:
 
 ## 🔄 GitHub Actions CI/CD 설정
 
-### 1. GitHub Secrets 설정
+GitHub Actions는 코드 푸시 시 자동으로 빌드 테스트를 실행합니다.
+별도의 설정 없이도 동작하지만, 빌드가 실패하는 경우 아래를 참고하세요.
+
+### 1. 자동 빌드 테스트
+
+- `main` 또는 `master` 브랜치에 푸시할 때마다 자동으로 빌드 테스트 실행
+- 린트 검사 및 빌드 검증 수행
+- 빌드 성공/실패 알림 확인
+
+### 2. GitHub Secrets 설정 (필요한 경우만)
+
+**중요**: GitHub Secrets는 선택사항입니다. 
+빌드가 정상적으로 완료되면 설정할 필요가 없습니다.
+
+빌드가 실패하는 경우에만 GitHub Secrets를 설정하세요:
 
 1. GitHub 저장소 → Settings → Secrets and variables → Actions
 2. "New repository secret" 클릭
@@ -110,15 +124,25 @@ Render 대시보드에서:
    - **Name**: `MONGODB_URI`
    - **Value**: MongoDB Atlas 연결 문자열
 
-### 2. 워크플로우 동작 확인
+### 3. 환경 변수 차이점
 
-- `main` 또는 `master` 브랜치에 푸시할 때마다 자동으로 빌드 테스트 실행
-- 빌드 성공/실패 알림 확인
+**Render와 GitHub Actions는 서로 다른 환경입니다:**
 
-### 3. Render 자동 배포 연동 (선택사항)
+| 환경 | 목적 | MONGODB_URI 설정 위치 |
+|------|------|---------------------|
+| **Render** | 실제 애플리케이션 실행 | Render 대시보드 → Environment 탭 (필수) |
+| **GitHub Actions** | 빌드 테스트만 수행 | GitHub Secrets (선택사항) |
+
+**참고**: 
+- Render 배포에는 Render 대시보드에서 환경 변수를 설정하면 됩니다.
+- GitHub Actions는 빌드 테스트만 하므로 실제 MongoDB 연결이 필요하지 않을 수 있습니다.
+- 빌드가 실패하는 경우에만 GitHub Secrets에 `MONGODB_URI`를 추가하세요.
+
+### 4. Render 자동 배포
 
 Render는 GitHub 저장소와 연결되어 있으면 자동으로 배포됩니다:
 - 코드 푸시 → Render가 변경 감지 → 자동 배포
+- GitHub Actions와는 독립적으로 동작합니다.
 
 ## 📁 프로젝트 구조
 
