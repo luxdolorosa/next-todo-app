@@ -38,6 +38,16 @@ jobs:
         if: success()
         run: echo "✅ Build completed successfully!"
 
+      - name: Trigger Render deployment
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if [ -n "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            echo "🚀 Triggering Render deployment..."
+            curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+            echo "✅ Render deployment triggered!"
+          else
+            echo "⚠️ RENDER_DEPLOY_HOOK secret not set. Skipping Render deployment."
+          fi
 
       - name: Build failure
         if: failure()
